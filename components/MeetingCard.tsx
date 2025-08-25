@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { avatarImages } from "@/constants";
 import { useToast } from "./ui/use-toast";
+import { format } from 'date-fns';
 
 interface MeetingCardProps {
   title: string;
@@ -16,7 +17,26 @@ interface MeetingCardProps {
   buttonText?: string;
   handleClick: () => void;
   link: string;
+  onShowSummary?: () => void;
+  loadingSummary?: boolean;
 }
+
+const getGoogleCalendarUrl = (title: string, date: string, link: string) => {
+  // Try to parse date to ISO format for Google Calendar
+  let start = '';
+  let end = '';
+  try {
+    const startDate = new Date(date);
+    start = format(startDate, "yyyyMMdd'T'HHmmss'Z'");
+    // Default to 1 hour duration
+    const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
+    end = format(endDate, "yyyyMMdd'T'HHmmss'Z'");
+  } catch {
+    // fallback: leave blank
+  }
+  const details = encodeURIComponent(`Join the meeting: ${link}`);
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&details=${details}&location=${encodeURIComponent(link)}`;
+};
 
 const MeetingCard = ({
   icon,
@@ -27,6 +47,8 @@ const MeetingCard = ({
   handleClick,
   link,
   buttonText,
+  onShowSummary,
+  loadingSummary,
 }: MeetingCardProps) => {
   const { toast } = useToast();
 
@@ -83,7 +105,18 @@ const MeetingCard = ({
               />
               &nbsp; Copy Link
             </Button>
+            <Button
+              onClick={() => window.open(getGoogleCalendarUrl(title, date, link), '_blank')}
+              className="bg-green-600 px-6 mt-4 ml-2"
+            >
+              Add to Google Calendar
+            </Button>
           </div>
+        )}
+        {isPreviousMeeting && onShowSummary && (
+          <Button onClick={onShowSummary} className="bg-purple-500 px-6 mt-4" disabled={loadingSummary}>
+            {loadingSummary ? 'Loading...' : 'AI Summarizer'}
+          </Button>
         )}
       </article>
     </section>

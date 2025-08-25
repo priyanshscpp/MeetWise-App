@@ -7,12 +7,25 @@ import { useGetCalls } from '@/hooks/useGetCalls';
 import MeetingCard from './MeetingCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+
+const fetchSummary = async (callId: string) => {
+  const res = await fetch(`/api/meeting-summary?callId=${callId}`);
+  if (!res.ok) throw new Error('Failed to fetch summary');
+  const data = await res.json();
+  return data.summary;
+};
+
+const SummaryModal = dynamic(() => import('./SummaryModal'), { ssr: false });
 
 const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   const router = useRouter();
   const { endedCalls, upcomingCalls, callRecordings, isLoading } =
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
+  const [summary, setSummary] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [loadingSummaryId, setLoadingSummaryId] = useState<string | null>(null);
 
   const getCalls = () => {
     switch (type) {
@@ -37,6 +50,20 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
         return 'No Recordings';
       default:
         return '';
+    }
+  };
+
+  const handleShowSummary = async (callId: string) => {
+    setLoadingSummaryId(callId);
+    try {
+      const summaryText = await fetchSummary(callId);
+      setSummary(summaryText);
+      setShowModal(true);
+    } catch (e) {
+      setSummary('You should have a premium plan for it to access as it will require chatgpt api access.');
+      setShowModal(true);
+    } finally {
+      setLoadingSummaryId(null);
     }
   };
 
@@ -98,10 +125,15 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
                 ? () => router.push(`${(meeting as CallRecording).url}`)
                 : () => router.push(`/meeting/${(meeting as Call).id}`)
             }
+            onShowSummary={type === 'ended' ? () => handleShowSummary((meeting as Call).id) : undefined}
+            loadingSummary={loadingSummaryId === (meeting as Call).id}
           />
         ))
       ) : (
         <h1 className="text-2xl font-bold text-white">{noCallsMessage}</h1>
+      )}
+      {showModal && (
+        <SummaryModal summary={summary} onClose={() => setShowModal(false)} />
       )}
     </div>
   );
