@@ -34,32 +34,44 @@ const MeetingModal = ({
 }: MeetingModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="flex w-full max-w-[520px] flex-col gap-6 border-none bg-dark-1 px-6 py-9 text-white">
-        <div className="flex flex-col gap-6">
+      <DialogContent className="flex w-full max-w-[520px] flex-col gap-8 border-none bg-dark-1/95 backdrop-blur-xl px-8 py-10 text-white shadow-large rounded-2xl border border-white/10">
+        <div className="flex flex-col gap-8">
           {image && (
             <div className="flex justify-center">
-              <Image src={image} alt="checked" width={72} height={72} />
+              <div className="p-4 bg-green-500/20 rounded-full border border-green-400/30">
+                <Image src={image} alt="checked" width={64} height={64} className="animate-fade-in" />
+              </div>
             </div>
           )}
-          <h1 className={cn("text-3xl font-bold leading-[42px]", className)}>
-            {title}
-          </h1>
-          {children}
+          
+          <div className="text-center">
+            <h1 className={cn("text-3xl font-bold leading-tight text-white", className)}>
+              {title}
+            </h1>
+          </div>
+          
+          {children && (
+            <div className="space-y-6">
+              {children}
+            </div>
+          )}
+          
           <Button
-            className={
-              "bg-blue-1 focus-visible:ring-0 focus-visible:ring-offset-0"
-            }
+            className={cn(
+              "w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-medium focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-dark-1",
+              buttonClassName
+            )}
             onClick={handleClick}
           >
             {buttonIcon && (
               <Image
                 src={buttonIcon}
                 alt="button icon"
-                width={13}
-                height={13}
+                width={16}
+                height={16}
+                className="mr-2"
               />
-            )}{" "}
-            &nbsp;
+            )}
             {buttonText || "Schedule Meeting"}
           </Button>
         </div>

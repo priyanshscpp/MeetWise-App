@@ -31,7 +31,7 @@
 }
 
 .str-video__participant-list {
-  background-color: #1c1f2e;
+  background-color: #1e293b;
   padding: 10px;
   border-radius: 10px;
   color: white;
@@ -42,19 +42,32 @@
   height: 40px;
 }
 
+/* Enhanced glassmorphism effects */
 .glassmorphism {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
+
 .glassmorphism2 {
-  background: rgba(18, 17, 17, 0.25);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glassmorphism-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 /* ==== clerk class override ===== */
-
 .cl-userButtonPopoverActionButtonIcon {
   color: white;
 }
@@ -62,18 +75,26 @@
 .cl-logoBox {
   height: 40px;
 }
+
 .cl-dividerLine {
-  background: #252a41;
+  background: #334155;
   height: 2px;
 }
 
 .cl-socialButtonsIconButton {
-  border: 3px solid #565761;
+  border: 2px solid #475569;
+  transition: all 0.3s ease;
+}
+
+.cl-socialButtonsIconButton:hover {
+  border-color: #3b82f6;
+  transform: translateY(-2px);
 }
 
 .cl-internal-wkkub3 {
   color: white;
 }
+
 .cl-userButtonPopoverActionButton {
   color: white;
 }
@@ -88,10 +109,18 @@
   .flex-between {
     @apply flex justify-between items-center;
   }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent;
+  }
+  
+  .bg-gradient-primary {
+    @apply bg-gradient-to-br from-blue-500 via-purple-500 to-blue-600;
+  }
+  
 }
 
-/* animation */
-
+/* Enhanced animations */
 .show-block {
   width: 100%;
   max-width: 350px;
@@ -103,10 +132,61 @@
   0% {
     animation-timing-function: ease-in;
     width: 0%;
+    opacity: 0;
   }
 
   100% {
     animation-timing-function: ease-in;
     width: 100%;
+    opacity: 1;
+  }
+}
+
+/* Smooth transitions for interactive elements */
+.interactive {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive:hover {
+  transform: translateY(-2px);
+}
+
+/* Professional scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Focus states */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-dark-1;
+}
+
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }
