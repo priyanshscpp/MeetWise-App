@@ -5,11 +5,11 @@ A modern, professional video conferencing application built with Next.js, featur
 ## ✨ Features
 
 - **Instant Meetings**: Start video calls immediately
-- **Scheduled Meetings**: Plan and schedule meetings in advance
-- **Meeting Join**: Join meetings via invitation links
+- **AI Notetaker and Summarizer**: Helps user to give notes of the meet on their dashboard
+- **Google Workspace Integration**: Join meetings via invitation links
 - **Recording Management**: View and manage meeting recordings
+- **Scheduled Meetings**: Plan and schedule meetings in advance
 - **Personal Room**: Dedicated personal meeting space
-- **Responsive Design**: Works seamlessly on all devices
 - **Professional UI**: Modern, clean interface design
 
 ## 🚀 Tech Stack
@@ -17,7 +17,6 @@ A modern, professional video conferencing application built with Next.js, featur
 - **Frontend**: Next.js 14, React 18, TypeScript
 - **Styling**: Tailwind CSS, CSS Modules
 - **Authentication**: Clerk
-- **Video SDK**: Stream Video React SDK
 - **UI Components**: Radix UI, Lucide React Icons
 - **Date Handling**: React DatePicker, date-fns
 
@@ -41,10 +40,6 @@ A modern, professional video conferencing application built with Next.js, featur
    CLERK_SECRET_KEY=your_clerk_secret
    NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
    NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
-   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
-   NEXT_PUBLIC_STREAM_API_KEY=your_stream_api_key
-   STREAM_API_SECRET=your_stream_secret
    NEXT_PUBLIC_BASE_URL=http://localhost:3000
    ```
 
