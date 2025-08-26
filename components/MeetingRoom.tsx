@@ -82,20 +82,7 @@ const MeetingRoom = () => {
       {/* video layout and call controls */}
       <div className="fixed bottom-0 flex w-full items-center justify-center gap-5">
         <CallControls onLeave={() => router.push(`/`)} />
-        <div className="flex items-center gap-3 ml-4">
-          <Button
-            variant={aiSummarizerActive ? 'premium' : 'default'}
-            onClick={() => setAiSummarizerActive((prev) => !prev)}
-          >
-            {aiSummarizerActive ? 'AI Summarizer Activated' : 'Activate AI Summarizer'}
-          </Button>
-          <Button
-            variant="success"
-            onClick={() => window.open(getGoogleCalendarUrl(), '_blank')}
-          >
-            Add to Google Calendar
-          </Button>
-        </div>
+
         <DropdownMenu>
           <div className="flex items-center">
             <DropdownMenuTrigger className="cursor-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4c535b]  ">
@@ -124,6 +111,20 @@ const MeetingRoom = () => {
           </div>
         </button>
         {!isPersonalRoom && <EndCallButton />}
+        <div className="flex justify-center gap-4 mb-4">
+          <Button
+            variant={aiSummarizerActive ? 'premium' : 'default'}
+            onClick={() => setAiSummarizerActive((prev) => !prev)}
+          >
+            {aiSummarizerActive ? 'AI Summarizer Activated' : 'Activate AI Summarizer'}
+          </Button>
+          <Button
+            variant="success"
+            onClick={() => window.open(getGoogleCalendarUrl(), '_blank')}
+          >
+            Add to Google Calendar
+          </Button>
+        </div>
       </div>
     </section>
   );
