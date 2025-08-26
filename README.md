@@ -20,6 +20,12 @@ A modern, professional video conferencing application built with Next.js, featur
 - **UI Components**: Radix UI, Lucide React Icons
 - **Date Handling**: React DatePicker, date-fns
 
+## Previews
+<img width="1919" height="1147" alt="Screenshot 2025-08-26 122211" src="https://github.com/user-attachments/assets/ebe5f2a8-62ac-48c6-82bb-20f903fb886c" />
+<img width="1905" height="1001" alt="Screenshot 2025-08-26 122245" src="https://github.com/user-attachments/assets/e9149602-fd3f-4e86-b9d6-bf2022d94ca7" />
+<img width="1919" height="1000" alt="Screenshot 2025-08-26 122548" src="https://github.com/user-attachments/assets/d3255495-120c-434b-aaf5-9bca29367f8c" />
+<img width="1916" height="1000" alt="Screenshot 2025-08-26 122505" src="https://github.com/user-attachments/assets/af49ecba-8066-423a-a764-cf1d07334975" />
+
 ## 🛠️ Installation
 
 1. **Clone the repository**
