@@ -10,7 +10,7 @@ A modern, professional video conferencing application built with Next.js, featur
 - **Recording Management**: View and manage meeting recordings
 - **Scheduled Meetings**: Plan and schedule meetings in advance
 - **Personal Room**: Dedicated personal meeting space
-- **Professional UI**: Modern, clean interface design
+- **Latency Checker**: You will find less and a latency checker for this appllication.
 
 ## 🚀 Tech Stack
 
