@@ -41,7 +41,7 @@ export const createTranscribedCall = async (callId: string, members: string[] = 
         // Optionally, set language or provider here
         // language_code: 'en-US',
       },
-      members,
+      members
     },
   });
   return call;
